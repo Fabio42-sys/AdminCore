@@ -1,10 +1,10 @@
 header {
-    grid-area: header;
-    width: 100%;
-    background-color: var(--header-bg);
-    border-bottom: 0.25px solid hsl(280, 100%, 60%);
-    box-shadow: 0 0 6px hsl(280, 100%, 60%), 0 0 16px hsl(280, 100%, 60% / 0.6);
-    z-index: 1;
+  grid-area: header;
+  width: 100%;
+  background-color: var(--header-bg);
+  border-bottom: 0.25px solid hsl(280, 100%, 60%);
+  box-shadow: 0 0 6px hsl(280, 100%, 60%), 0 0 16px hsl(280, 100%, 60% / 0.6);
+  z-index: 1;
 }
 
 .headerNav {
@@ -29,6 +29,22 @@ header {
   align-items: center;
   gap: 8px;
   padding: 0.2rem 0.2rem;
+}
+
+.scapeUtils {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.fastScape {
+  color: hsl(244deg 15% 88%);
+  cursor: pointer;
+}
+
+.fastScape:hover {
+  color: hsl(240, 3%, 71%);
+  transform: translateY(-4px);
 }
 
 .containerSearch {
@@ -60,4 +76,10 @@ header {
 
 .searchBar:focus {
   outline: none;
+}
+
+.fastScape {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
 }

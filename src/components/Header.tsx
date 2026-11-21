@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { DEFAULT_TITLE, NAV_ITEMS } from "../navItems";
 import { FaMagnifyingGlass } from "react-icons/fa6";
+import { FaCogs, FaBell } from "react-icons/fa";
 import "../styles/Header.css";
 
 export default function Header() {
@@ -18,19 +19,24 @@ export default function Header() {
           {title}
         </h1>
 
-        <div
-          className={`containerSearch ${searchFocused ? "containerSearchFocus" : ""}`}
-        >
+        <div className="scapeUtils">
+          <div
+            className={`containerSearch ${searchFocused ? "containerSearchFocus" : ""}`}
+          >
 
-          <FaMagnifyingGlass className="searchIcon" aria-hidden="true" />
+            <FaMagnifyingGlass className="searchIcon" aria-hidden="true" />
 
-          <input
-            className="searchBar"
-            type="text"
-            placeholder="Pesquisar..."
-            onFocus={() => setSearchFocused(true)}
-            onBlur={() => setSearchFocused(false)}
-          />
+            <input
+              className="searchBar"
+              type="text"
+              placeholder="Pesquisar..."
+              onFocus={() => setSearchFocused(true)}
+              onBlur={() => setSearchFocused(false)}
+            />
+          </div>
+
+          <FaBell className="fastScape" aria-hidden="true" />
+          <FaCogs className="fastScape" aria-hidden="true" />
         </div>
       </nav>
     </header>
