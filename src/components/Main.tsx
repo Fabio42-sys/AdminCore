@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import ConfigsPage from "../pagination/Configs";
 import '../styles/Main.css';
 
 export default function Main() {
@@ -40,5 +41,7 @@ function Perfil() {
 }
 
 function Configs() {
-  return <section className="page-content active">{/* HTML da página de relatórios */}</section>;
+  return <section className="page-content active">
+    <ConfigsPage />
+  </section>;
 }

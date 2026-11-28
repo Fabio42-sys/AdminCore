@@ -3,7 +3,7 @@ main {
     width: 100%;
     height: 100%;
     padding: 1.5rem; /* Respiro interno para os cards e conteúdos */
-    overflow-y: auto; /* Permite rolar apenas o conteúdo principal se ele crescer */
+    overflow-y: scroll; /* Permite rolar apenas o conteúdo principal se ele crescer */
     display: flex;
     flex-direction: column;
 }

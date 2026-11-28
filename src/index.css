@@ -23,6 +23,41 @@
   --chart-color: hsl(261, 54%, 28%);
 }
 
+:root[data-theme="light"] {
+  color-scheme: light; /* scrollbars e inputs nativos também ficam claros */
+
+  /* Superfícies: lavanda suave em vez de quase branco */
+  --bg-main: hsl(280, 30%, 92%);
+  --bg-card: hsl(280, 35%, 96%);
+  --sidebar-bg: hsl(284, 38%, 86%);
+  --header-bg: hsl(280, 35%, 89%);
+
+  /* Tipografia (sem transparência, contraste previsível) */
+  --text-main: hsl(283, 45%, 14%);
+  --text-secondary: hsl(280, 18%, 34%);
+
+  /* Bordas visíveis */
+  --border-color: hsl(281, 28%, 76%);
+
+  /* Botões */
+  --btn-primary: hsl(290, 65%, 40%);
+  --btn-primary-hover: hsl(292, 68%, 31%);
+  --btn-secondary: hsl(271, 40%, 82%);
+  --btn-secondary-hover: hsl(270, 42%, 74%);
+
+  /* Saída / alerta */
+  --bnt-exit: hsl(0, 70%, 42%);
+  --bnt-exit-hover: hsl(0, 75%, 34%);
+
+  /* Estados, ícones e gráficos */
+  --element-selected: hsl(300, 70%, 34%);
+  --icon-color: hsl(290, 55%, 38%);
+  --icon-color-exit: hsl(0, 70%, 42%);
+  --icon-color-exit-hover: hsl(0, 75%, 34%);
+  --chart-color: hsl(265, 55%, 48%);
+
+}
+
 * {
   margin: 0;
   padding: 0;

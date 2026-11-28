@@ -1,5 +1,5 @@
-import { useEffect, useRef } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useRef } from "react";
+import { NavLink } from "react-router-dom";
 import { FiLogOut } from "react-icons/fi";
 import { NAV_ITEMS } from "../navItems";
 import { useTheme } from "../ThemeContext";
@@ -7,19 +7,8 @@ import "../styles/Aside.css";
 
 export default function Aside() {
   const asideRef = useRef<HTMLElement>(null);
-  const navigate = useNavigate();
   const { theme } = useTheme();
 
-  // Clicou fora da sidebar → volta para a tela inicial
-  useEffect(() => {
-    const handleClick = (e: MouseEvent) => {
-      if (asideRef.current && !asideRef.current.contains(e.target as Node)) {
-        navigate("/", { replace: true });
-      }
-    };
-    document.addEventListener("click", handleClick);
-    return () => document.removeEventListener("click", handleClick);
-  }, [navigate]);
 
   return (
     <aside ref={asideRef}>

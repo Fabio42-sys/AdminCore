@@ -2,36 +2,57 @@ import { createContext, useContext, useEffect, useState } from "react";
 import type { ReactNode } from "react";
 
 export type Theme = "light" | "dark";
+export type ThemePreference = Theme | "system";
 
 interface ThemeContextValue {
-  theme: Theme;
+  preference: ThemePreference;       // o que o usuário escolheu
+  theme: Theme;                      // o tema realmente aplicado
+  setPreference: (p: ThemePreference) => void;
   toggleTheme: () => void;
 }
 
 const ThemeContext = createContext<ThemeContextValue | null>(null);
 
-function getInitialTheme(): Theme {
+const darkQuery = "(prefers-color-scheme: dark)";
+
+function getInitialPreference(): ThemePreference {
   const saved = localStorage.getItem("theme");
-  if (saved === "light" || saved === "dark") return saved;
-  return window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? "dark"
-    : "light";
+  if (saved === "light" || saved === "dark" || saved === "system") return saved;
+  return "system";
+}
+
+function getSystemTheme(): Theme {
+  return window.matchMedia(darkQuery).matches ? "dark" : "light";
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<Theme>(getInitialTheme);
+  const [preference, setPreference] =
+    useState<ThemePreference>(getInitialPreference);
+  const [systemTheme, setSystemTheme] = useState<Theme>(getSystemTheme);
 
-  // Reflete o tema no <html data-theme="..."> e salva a escolha
+  // Acompanha mudanças do tema do sistema em tempo real
+  useEffect(() => {
+    const mq = window.matchMedia(darkQuery);
+    const onChange = () => setSystemTheme(mq.matches ? "dark" : "light");
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
+
+  const theme: Theme = preference === "system" ? systemTheme : preference;
+
+  // Reflete o tema no <html data-theme="..."> e salva a preferência
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
-    localStorage.setItem("theme", theme);
-  }, [theme]);
+    localStorage.setItem("theme", preference);
+  }, [theme, preference]);
 
   const toggleTheme = () =>
-    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+    setPreference(theme === "light" ? "dark" : "light");
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider
+      value={{ preference, theme, setPreference, toggleTheme }}
+    >
       {children}
     </ThemeContext.Provider>
   );
